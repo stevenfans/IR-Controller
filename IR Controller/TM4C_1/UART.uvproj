@@ -437,19 +437,24 @@
               <FilePath>.\UART.c</FilePath>
             </File>
             <File>
-              <FileName>UARTTestMain.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\UARTTestMain.c</FilePath>
-            </File>
-            <File>
               <FileName>SysTick.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\SysTick.c</FilePath>
             </File>
             <File>
+              <FileName>IRTestMain.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\IRTestMain.c</FilePath>
+            </File>
+            <File>
               <FileName>PWM.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\PWM.c</FilePath>
+            </File>
+            <File>
+              <FileName>IR_Mod.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\IR_Mod.c</FilePath>
             </File>
           </Files>
         </Group>

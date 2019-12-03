@@ -22,15 +22,18 @@
 
 // U0Rx (VCP receive) connected to PA0
 // U0Tx (VCP transmit) connected to PA1
+#define SIGNAL       				(*((volatile unsigned long *)0x40004030))
+
 
 #include "tm4c123gh6pm.h"
 #include "PLL.h"
 #include "UART.h"
 #include "SysTick.h"
 #include "PWM.h"
+#include "IR_Mod.h"
 
 void PORTF_Init(void);
-void Init_PortB(void);
+//void Init_PortB(void);
 void EnableInterrupts(void);
 unsigned long stringToNumber(char string[4]); 
 
@@ -46,50 +49,50 @@ int main(void){
 	unsigned char n;																		
 	unsigned char isFrequency = 0x00; // flag to check if there is an f 
 	char a = 0xFF;
-	int k,j;
 	int sum = 0;
 	unsigned long pwm_value, freq_value;
 	
-	SysTick_Init();
-	Init_PortB();
-  
+	SysTick_Init();  
+	Init_PortA(); 
   UART_Init();              // initialize UART
   UART1_Init(); 						// initialize UART1
 	UART2_Init(); 						// initialize UART2
-	
-  OutCRLF();
 	
 	//PORTF_Init(); 
 	PWM_Init(40000, 39000); 
 	EnableInterrupts();          		 	//AFTER inits, 
 	PLL_Init();
-
+	
+	//SIGNAL = 0xFF; 
+	//GPIO_PORTA_DATA_R = 0xFF; 
+	
   while(1){
-		
-		UART1_OutString("Enter Something: "); 
-		UART1_InString(string, 5);  OutCRLF1(); 
-		
-		// check to see if the first char is for frequency or blink led change
-		if (string[0] == 'f'){
-			// parse and get the number
-			freq_value=stringToNumber(string);
-			UART2_OutUDec(freq_value); OutCRLF2();
-			UART_OutUDec(freq_value); OutCRLF(); 
-			// output to the the second TM4C
-		}
-		else{
-			// parse and get the number
-			pwm_value = stringToNumber(string);
-			UART_OutUDec(pwm_value); OutCRLF(); 
-			//dim lights 
-			if (pwm_value>255){pwm_value = 39000;}
-			else if(pwm_value==0){pwm_value=0;}
-			else{
-			pwm_value = (int)((((float)pwm_value/255)*38000)+1000 - 3);///10; 
-			}
-				UART_OutUDec(pwm_value); OutCRLF(); 
-			PWM_PF1_Duty(pwm_value);  
-		}
+		startPulse(); 
+		//modulateSignal(); 
+//		UART1_OutString("Enter Something: "); 
+//		UART1_InString(string, 5);  OutCRLF1(); 
+//		
+//		// check to see if the first char is for frequency or blink led change
+//		if (string[0] == 'f'){
+//			// parse and get the number
+//			freq_value=stringToNumber(string);
+//			UART2_OutUDec(freq_value); OutCRLF2();
+//			UART_OutUDec(freq_value); OutCRLF(); 
+//			// output to the the second TM4C
+//		}
+//		else{
+//			// parse and get the number
+//			pwm_value = stringToNumber(string);
+//			UART_OutUDec(pwm_value); OutCRLF(); 
+//			//dim lights 
+//			if (pwm_value>255){pwm_value = 39000;}
+//			else if(pwm_value==0){pwm_value=0;}
+//			else{
+//			pwm_value = (int)((((float)pwm_value/255)*38000)+1000 - 3);///10; 
+//			}
+//				UART_OutUDec(pwm_value); OutCRLF(); 
+//			PWM_PF2_Duty(pwm_value);  
+//		}
 	}
 }
 
@@ -150,12 +153,3 @@ void PORTF_Init(void){
   NVIC_EN0_R = 0x40000000;      // (h) enable interrupt 30 in NVIC
 }
 
-void Init_PortB(void){ 
-  SYSCTL_RCGC2_R |= 0x00000002;     // 1) B clock
-  GPIO_PORTB_CR_R |= 0xFF;           // allow changes to PB7-0      
-  GPIO_PORTB_AMSEL_R = 0x00;        // 3) disable analog function
-  GPIO_PORTB_PCTL_R = 0x00000000;   // 4) GPIO clear bit PCTL  
-  GPIO_PORTB_DIR_R = 0xFF  ;          // 5) PB7-PB0 output 
-  GPIO_PORTB_AFSEL_R = 0x00;        // 6) no alternate function
-  GPIO_PORTB_DEN_R |= 0xFF;          // 7) enable digital pins P7-PB0   
-}

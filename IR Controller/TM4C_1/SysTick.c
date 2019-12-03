@@ -53,7 +53,7 @@ void SysTick_Init(void){
   NVIC_ST_CTRL_R = NVIC_ST_CTRL_ENABLE+NVIC_ST_CTRL_CLK_SRC;
 }
 // Time delay using busy wait.
-// The delay parameter is in units of the core clock. (units of 62.5 nsec for 80 MHz clock)
+// The delay parameter is in units of the core clock. (units of 20 nsec for 50 MHz clock)
 void SysTick_Wait(unsigned long delay){
   volatile unsigned long elapsedTime;
   unsigned long startTime = NVIC_ST_CURRENT_R;
@@ -62,6 +62,12 @@ void SysTick_Wait(unsigned long delay){
   }
   while(elapsedTime <= delay);
 }
+// 38Khz ->t=1/f-> 1/38e6-> 26.3e-6
+// 26.3e-6/20e-9 = 1300 / 2
+void SysTick_Wait19Khz(void){
+	SysTick_Wait(600); 
+}
+
 // Time delay using busy wait.
 // This assumes 16 MHz system clock.
 void SysTick_Wait1us(unsigned long delay){
