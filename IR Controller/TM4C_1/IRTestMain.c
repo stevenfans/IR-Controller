@@ -23,7 +23,11 @@
 // U0Rx (VCP receive) connected to PA0
 // U0Tx (VCP transmit) connected to PA1
 #define SIGNAL       				(*((volatile unsigned long *)0x40004030))
-
+#define LIGHT 							(*((volatile unsigned long *)0x40025038))
+#define RED 		0x02; 
+#define BLUE 		0x04; 
+#define GREEN   0x08; 
+#define WHITE   0x0E; 
 
 #include "tm4c123gh6pm.h"
 #include "PLL.h"
@@ -31,26 +35,29 @@
 #include "SysTick.h"
 #include "PWM.h"
 #include "IR_Mod.h"
+#include <math.h>
+#include <stdlib.h>
+
 
 void PORTF_Init(void);
-//void Init_PortB(void);
 void EnableInterrupts(void);
 unsigned long stringToNumber(char string[4]); 
+char device_number=0; //defualt device 0
+
 
 int main(void){
-	unsigned char x;
-  unsigned char i;
-  char string[5];  // global to assist in debugging
-	char new_string[10];  // global to assist in debugging
-  unsigned int value; 
-	unsigned long c;
+//	unsigned char x;
+//  unsigned char i;
+	unsigned long freq_value; 
+  char string[5]; 			// global to assist in debugging
+	char address[2], command[3]; 
+//  unsigned int value; 
+//	unsigned long c;
 	
-	/////
-	unsigned char n;																		
+//	unsigned char n;																		
 	unsigned char isFrequency = 0x00; // flag to check if there is an f 
 	char a = 0xFF;
 	int sum = 0;
-	unsigned long pwm_value, freq_value;
 	
 	SysTick_Init();  
 	Init_PortA(); 
@@ -58,28 +65,26 @@ int main(void){
   UART1_Init(); 						// initialize UART1
 	UART2_Init(); 						// initialize UART2
 	
-	//PORTF_Init(); 
-	PWM_Init(40000, 39000); 
+	PORTF_Init(); 
 	EnableInterrupts();          		 	//AFTER inits, 
 	PLL_Init();
 	
-	//SIGNAL = 0xFF; 
-	//GPIO_PORTA_DATA_R = 0xFF; 
+	LIGHT = RED; //start off with red
 	
   while(1){
-		startPulse(); 
+		//TODO: parse data to get individual bits
 		//modulateSignal(); 
-//		UART1_OutString("Enter Something: "); 
-//		UART1_InString(string, 5);  OutCRLF1(); 
-//		
-//		// check to see if the first char is for frequency or blink led change
-//		if (string[0] == 'f'){
-//			// parse and get the number
-//			freq_value=stringToNumber(string);
-//			UART2_OutUDec(freq_value); OutCRLF2();
-//			UART_OutUDec(freq_value); OutCRLF(); 
-//			// output to the the second TM4C
-//		}
+		UART1_OutString("Enter Something: "); 
+		UART1_InString(string, 5);  OutCRLF1(); 
+		
+		// check to see if the first char is for frequency or blink led change
+		//if (string[0] == 'f'){
+			// parse and get the number
+			//freq_value=stringToNumber(string);
+			//UART2_OutUDec(freq_value); OutCRLF2();
+			//UART_OutUDec(freq_value); OutCRLF(); 
+			// output to the the second TM4C
+	//	}
 //		else{
 //			// parse and get the number
 //			pwm_value = stringToNumber(string);
@@ -96,7 +101,6 @@ int main(void){
 	}
 }
 
-
 // Color    LED(s) PortF
 // dark     ---    0
 // red      R--    0x02
@@ -106,8 +110,6 @@ int main(void){
 // sky blue -GB    0x0C	
 // white    RGB    0x0E
 // pink     R-B    0x06
-
-
 unsigned long stringToNumber(char string[4]){
 	int i;  
 	int answer = 0; 
@@ -120,10 +122,19 @@ unsigned long stringToNumber(char string[4]){
 		place_value *= 10; 
 		}
 	}
-	//UART_OutUDec(answer); OutCRLF(); 
 	return answer; 
 }
 
+char *decimalToBin(char decimal){
+	char *bin_array = malloc(3);  
+	int i = 0; 
+	while(decimal>0){
+		bin_array[i] = decimal%2; 
+		decimal = floor(decimal/2); 
+		i++; 
+	}	
+	return bin_array; 
+}
 // global variable visible in Watch window of debugger
 // increments at least once per button press
 void PORTF_Init(void){      
@@ -153,3 +164,20 @@ void PORTF_Init(void){
   NVIC_EN0_R = 0x40000000;      // (h) enable interrupt 30 in NVIC
 }
 
+void GPIOPortF_Handler(void){
+	if ((GPIO_PORTF_RIS_R & 0x10)){ // sw1 is pressed
+		GPIO_PORTF_ICR_R = 0x10;
+		if (LIGHT==0x08) {
+			LIGHT = WHITE;
+			device_number = 3; 
+		}
+		else if (LIGHT==0x0E){
+			LIGHT=RED;
+			device_number = 0; 
+		}
+		else  {
+			LIGHT = LIGHT << 1; 
+			device_number +=1; 
+		}
+	}
+}

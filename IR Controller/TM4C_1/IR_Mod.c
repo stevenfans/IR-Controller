@@ -35,7 +35,7 @@ void startPulse(void){
 		nomodulateSignal(); 
 	}
 }
-
+// 900us high = 34 pulses, 450us low = 17 pulses
 void logical_1(void){
 	unsigned long i; 
 	for(i=0; i<34; i++){
@@ -45,6 +45,8 @@ void logical_1(void){
 		nomodulateSignal(); 
 	}
 }
+
+// 450us high = 17 pulses, 450us low = 17 pulses
 void logical_0(void){
 	unsigned long i; 
 	for(i=0; i<17; i++){
@@ -53,5 +55,10 @@ void logical_0(void){
 	for(i=0; i<17; i++){
 		nomodulateSignal(); 
 	}
+}
+
+void sendPackage(char address[2], char command[3]){
+	startPulse(); 
+	
 }
 	
