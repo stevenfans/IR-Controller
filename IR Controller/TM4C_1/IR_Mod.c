@@ -57,8 +57,18 @@ void logical_0(void){
 	}
 }
 
-void sendPackage(char address[2], char command[3]){
+void sendPackage(char*ptr, char*cmd){
+	char bin; 
+	int i; 
 	startPulse(); 
-	
+	for(i=2;i>=0; i--){
+		bin = ptr[i];
+		if(bin==1) logical_1(); 
+		else logical_0(); 
+	}
+	for(i=3; i>=0; i--){
+		bin = cmd[i];
+		if(bin==1) logical_1(); 
+		else logical_0(); 
+	}
 }
-	

@@ -82,7 +82,6 @@ void UART1_Init(void){
   GPIO_PORTB_AFSEL_R |= 0x03;           // enable alt funct on PB1-0
   GPIO_PORTB_DEN_R |= 0x03;             // enable digital I/O on PB1-0
                                         // configure PA1-0 as UART
-  //GPIO_PORTB_PCTL_R = (GPIO_PORTB_PCTL_R&0xFFFFFF00)+0x00000011;
 	GPIO_PORTB_PCTL_R &= ~0x000000FF; 
 	GPIO_PORTB_PCTL_R |=  0x00000011; 
   GPIO_PORTB_AMSEL_R &= ~0x03;          // disable analog functionality on PA

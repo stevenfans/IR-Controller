@@ -6,3 +6,5 @@
 .\irtestmain.o: PWM.h
 .\irtestmain.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\irtestmain.o: IR_Mod.h
+.\irtestmain.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\irtestmain.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
