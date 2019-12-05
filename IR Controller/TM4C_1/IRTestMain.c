@@ -44,7 +44,7 @@ void EnableInterrupts(void);
 unsigned long stringToNumber(char string[4]);
 char *decimalToBin(char*arr, int decimal); 
 
-char device_number = 0; //default 0
+unsigned long device_number = 0; //default 0
 
 int main(void){
 //	unsigned char x;
@@ -80,40 +80,18 @@ int main(void){
 		n = 0;
 
 		//startPulse(); 
-		//TODO: parse data to get individual bits
-		//modulateSignal(); 
-		UART1_OutString("Enter Something: ");
-		UART1_InString(string, 5);  OutCRLF1(); 
-		//command_decimal_num = stringToNumber(string); 
+		UART1_OutString("Enter Something: "); UART_OutChar('s'); 
+		UART1_InString(string, 1);  OutCRLF1(); 
+		command_decimal_num = string[0]-'0';
 
 	//turn the device number to a binary value
+		//UART_OutUDec(device_number); 	
 		addr_ptr = decimalToBin(address,device_number); 
 	//turn the command value to binary value
+		//UART_OutUDec(command_decimal_num);
 		cmd_ptr = decimalToBin(command, command_decimal_num); 
 		
-		
 		sendPackage(addr_ptr, cmd_ptr);
-		// check to see if the first char is for frequency or blink led change
-		//if (string[0] == 'f'){
-			// parse and get the number
-			//freq_value=stringToNumber(string);
-			//UART2_OutUDec(freq_value); OutCRLF2();
-			//UART_OutUDec(freq_value); OutCRLF(); 
-			// output to the the second TM4C
-	//	}
-//		else{
-//			// parse and get the number
-//			pwm_value = stringToNumber(string);
-//			UART_OutUDec(pwm_value); OutCRLF(); 
-//			//dim lights 
-//			if (pwm_value>255){pwm_value = 39000;}
-//			else if(pwm_value==0){pwm_value=0;}
-//			else{
-//			pwm_value = (int)((((float)pwm_value/255)*38000)+1000 - 3);///10; 
-//			}
-//				UART_OutUDec(pwm_value); OutCRLF(); 
-//			PWM_PF2_Duty(pwm_value);  
-//		}
 	}
 }
 
@@ -126,32 +104,39 @@ int main(void){
 // sky blue -GB    0x0C	
 // white    RGB    0x0E
 // pink     R-B    0x06
-unsigned long stringToNumber(char string[4]){
+
+// takes in a string of 3 elements and turn it to a a number
+unsigned long stringToNumber(char string[3]){
 	int i;  
 	int answer = 0; 
 	int place_value = 1; 
-	
 	for (i=3;i>0;i--){
-		if (string[i]!=CR&&string[i]!=LF&&//check if there is not a null value
-				string[i]!=0){
+		if (string[i]!=CR&&string[i]!=LF){//check if there is not a null value
+		UART_OutChar(string[i]); 
 		answer += place_value * (string[i]-'0'); // convert decimal to char   
 		place_value *= 10; 
 		}
 	}
+	//UART_OutUDec(answer); 
 	return answer; 
 }
 
 // return a pointer to an array of binary values	
 char *decimalToBin(char*arr, int decimal){
-
 	int i = 0; 
+	//UART_OutUDec(decimal); OutCRLF(); 
+	if(decimal==0){//zerocase
+		arr[0] = 0; 
+		arr[1] = 0; 
+	}
+	//UART_OutChar('m');
 	while(decimal>0){
-		//bin_array[i] = decimal%2;
 		arr[i] = decimal%2;  
+		//UART_OutChar('M');
 		decimal = floor(decimal/2); 
 		i++; 
 	}
-		return arr;  
+	return arr;  
 }
 
 // global variable visible in Watch window of debugger

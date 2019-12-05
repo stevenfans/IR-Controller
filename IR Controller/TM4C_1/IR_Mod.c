@@ -2,6 +2,7 @@
 #include "SysTick.h"
 #include "tm4c123gh6pm.h"
 #include "IR_Mod.h"
+#include "UART.h"
 
 #define SIGNAL       				(*((volatile unsigned long *)0x40004030))
 	
@@ -59,16 +60,22 @@ void logical_0(void){
 
 void sendPackage(char*ptr, char*cmd){
 	char bin; 
+	unsigned long number; 
 	int i; 
+	
 	startPulse(); 
-	for(i=2;i>=0; i--){
+//	logical_0(); 
+//	logical_1(); 
+	//UART_OutUDec(ptr[1]); UART_OutUDec(ptr[0]); 
+	for(i=1;i>=0; i--){
 		bin = ptr[i];
+		//UART_OutUDec(number);
 		if(bin==1) logical_1(); 
 		else logical_0(); 
 	}
-	for(i=3; i>=0; i--){
+	for(i=2; i>=0; i--){
 		bin = cmd[i];
-		if(bin==1) logical_1(); 
+		if(bin==1) logical_1() ; 
 		else logical_0(); 
 	}
 }
