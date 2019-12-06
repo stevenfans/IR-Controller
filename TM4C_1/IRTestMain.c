@@ -132,7 +132,6 @@ char *decimalToBin(char*arr, int decimal){
 	//UART_OutChar('m');
 	while(decimal>0){
 		arr[i] = decimal%2;  
-		//UART_OutChar('M');
 		decimal = floor(decimal/2); 
 		i++; 
 	}

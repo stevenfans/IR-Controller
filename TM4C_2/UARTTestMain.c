@@ -3,6 +3,7 @@
 #include "Tone.h"
 #include "SysTick.h"
 #include "tm4c123gh6pm.h"
+#include "IR_Demod.h"
 
 
 void PORTF_Init(void);
@@ -25,13 +26,14 @@ int main(void){
   UART_Init();
 	UART2_Init();
 	
+	Init_PortA(); 
 	Init_PortB();
 	PORTF_Init();
+	
 	//GPIO_PORTF_DATA_R = 0x08; 
 	//UART2_OutString("TEEST"); 
   while(1){
-		SysTick_Init(80000000/256/frequency); // Clk / sine wave steps / desired frequency
-		
+		testA(); 
     //UART_OutString("InUDec: ");  frequency=UART_InUDec();
     //UART_OutString(" OutUDec="); UART_OutUDec(frequency); OutCRLF();
 		if (frequency < 262) frequency = last_frequency;
@@ -40,8 +42,6 @@ int main(void){
 			last_frequency = frequency;
 			frequency = UART2_InUDec(); 
 		}
-		//UART2_InString(string, 10);
-		//GPIO_PORTF_DATA_R = 0x0A; //yellow
   }
 }
 

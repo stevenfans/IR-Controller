@@ -1,23 +1,25 @@
 Dependencies for Project 'UART', Target 'UART': (DO NOT MODIFY !)
-F (.\startup.s)(0x5DD3459F)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
-F (.\PLL.c)(0x5DD3459F)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\pll.o --omf_browse .\pll.crf --depend .\pll.d)
-I (PLL.h)(0x5DD3459F)
-F (.\UART.c)(0x5DD3459F)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\uart.o --omf_browse .\uart.crf --depend .\uart.d)
-I (UART.h)(0x5DD3459F)
-I (..\tm4c123gh6pm.h)(0x5DD3459F)
-F (.\UARTTestMain.c)(0x5DD345FA)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\uarttestmain.o --omf_browse .\uarttestmain.crf --depend .\uarttestmain.d)
-I (PLL.h)(0x5DD3459F)
-I (UART.h)(0x5DD3459F)
-I (Tone.h)(0x5DD3459F)
-I (SysTick.h)(0x5DD3459F)
-I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C89844)
-I (..\tm4c123gh6pm.h)(0x5DD3459F)
-F (.\Tone.c)(0x5DD3459F)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\tone.o --omf_browse .\tone.crf --depend .\tone.d)
-I (Tone.h)(0x5DD3459F)
-I (..\tm4c123gh6pm.h)(0x5DD3459F)
-I (SysTick.h)(0x5DD3459F)
-I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C89844)
-F (.\SysTick.c)(0x5DD3459F)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\systick.o --omf_browse .\systick.crf --depend .\systick.d)
-I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C89844)
-I (..\tm4c123gh6pm.h)(0x5DD3459F)
-I (Tone.h)(0x5DD3459F)
+F (.\startup.s)(0x5DE5F556)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Luminary--pd "__UVISION_VERSION SETA 527"--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
+F (.\PLL.c)(0x5DE5F555)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I .. -I ..\..\..-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Luminary-D__UVISION_VERSION="527" -Drvmdk -DPART_LM4F120H5QR-o .\pll.o --omf_browse .\pll.crf --depend .\pll.d)
+I (PLL.h)(0x5DE5F555)
+F (.\UART.c)(0x5DE5F555)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I .. -I ..\..\..-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Luminary-D__UVISION_VERSION="527" -Drvmdk -DPART_LM4F120H5QR-o .\uart.o --omf_browse .\uart.crf --depend .\uart.d)
+I (UART.h)(0x5DE5F555)
+I (..\tm4c123gh6pm.h)(0x5DE93FEB)
+F (.\UARTTestMain.c)(0x5DE9D1C7)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I .. -I ..\..\..-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Luminary-D__UVISION_VERSION="527" -Drvmdk -DPART_LM4F120H5QR-o .\uarttestmain.o --omf_browse .\uarttestmain.crf --depend .\uarttestmain.d)
+I (PLL.h)(0x5DE5F555)
+I (UART.h)(0x5DE5F555)
+I (Tone.h)(0x5DE5F555)
+I (SysTick.h)(0x5DEA31A0)
+I (..\tm4c123gh6pm.h)(0x5DE93FEB)
+I (IR_Demod.h)(0x5DE9D4F4)
+F (.\Tone.c)(0x5DE5F555)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I .. -I ..\..\..-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Luminary-D__UVISION_VERSION="527" -Drvmdk -DPART_LM4F120H5QR-o .\tone.o --omf_browse .\tone.crf --depend .\tone.d)
+I (Tone.h)(0x5DE5F555)
+I (..\tm4c123gh6pm.h)(0x5DE93FEB)
+I (SysTick.h)(0x5DEA31A0)
+F (.\SysTick.c)(0x5DE9CF87)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I .. -I ..\..\..-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Luminary-D__UVISION_VERSION="527" -Drvmdk -DPART_LM4F120H5QR-o .\systick.o --omf_browse .\systick.crf --depend .\systick.d)
+I (SysTick.h)(0x5DEA31A0)
+F (.\IR_Demod.c)(0x5DE9D4D9)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I .. -I ..\..\..-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Luminary-D__UVISION_VERSION="527" -Drvmdk -DPART_LM4F120H5QR-o .\ir_demod.o --omf_browse .\ir_demod.crf --depend .\ir_demod.d)
+I (SysTick.h)(0x5DEA31A0)
+I (IR_Demod.h)(0x5DE9D4F4)
+I (..\tm4c123gh6pm.h)(0x5DE93FEB)
+I (UART.h)(0x5DE5F555)
