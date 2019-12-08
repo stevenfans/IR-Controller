@@ -18,8 +18,8 @@ void Init_PortA(void){
 	GPIO_PORTA_DEN_R |= 0x04; 				// used this pins 
 	GPIO_PORTA_DIR_R &= ~0x04; 				// input pins on PA5~0
 	GPIO_PORTA_CR_R |= 0x04;          // allow changes to PD5-0      
-  GPIO_PORTA_AMSEL_R = 0x00;        // 3) disable analog function
-  GPIO_PORTA_PCTL_R = 0x00000000;   // 4) GPIO clear bit PCTL 
+  GPIO_PORTA_AMSEL_R &= ~0x04;        // 3) disable analog function
+  GPIO_PORTA_PCTL_R &= ~0x04; ;   // 4) GPIO clear bit PCTL 
 	
 	GPIO_PORTA_IS_R &= ~0x04;
 	GPIO_PORTA_IBE_R &= ~0x04;
@@ -30,12 +30,16 @@ void Init_PortA(void){
 	NVIC_EN0_R |= 0x00000001;
 }
 
-void GPIOPortA_Handler(void){
 
-	if (GPIO_PORTA_RIS_R & 0x04){ // sw1 is pressed
-		GPIO_PORTA_ICR_R = 0x04; // clear flag
-		GPIO_PORTF_DATA_R = 0x02; 
-	}
-}
+//void GPIOPortA_Handler(void){
+
+//	if (GPIO_PORTA_RIS_R & 0x04){ // sw1 is pressed
+//		GPIO_PORTA_ICR_R = 0x04; // clear flag
+//		if (running ==0x00){
+//			GPIO_PORTF_DATA_R = 0x02; 
+//			running = 0xFF; // got the first bit 
+//		}
+//	}
+//}
 
 

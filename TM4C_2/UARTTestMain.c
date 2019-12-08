@@ -5,6 +5,11 @@
 #include "tm4c123gh6pm.h"
 #include "IR_Demod.h"
 
+#define SIGNAL       				(*((volatile unsigned long *)0x40004030))
+
+int running = 0; 
+unsigned int tally_1 = 0; // hold the count for every time there is a 1 
+unsigned int tally_0 = 0; // hold the count for every time there is a 0
 
 void PORTF_Init(void);
 //---------------------OutCRLF---------------------
@@ -29,19 +34,18 @@ int main(void){
 	Init_PortA(); 
 	Init_PortB();
 	PORTF_Init();
-	
-	//GPIO_PORTF_DATA_R = 0x08; 
-	//UART2_OutString("TEEST"); 
+	SysTick_Init(800); 
+	GPIO_PORTF_DATA_R = 0x0E; 
+	UART_OutChar('a'); 
   while(1){
-		testA(); 
-    //UART_OutString("InUDec: ");  frequency=UART_InUDec();
-    //UART_OutString(" OutUDec="); UART_OutUDec(frequency); OutCRLF();
-		if (frequency < 262) frequency = last_frequency;
-		else if (frequency > 494) frequency = last_frequency;
-		else {
-			last_frequency = frequency;
-			frequency = UART2_InUDec(); 
+		
+		UART_OutString("Signal 0 Count: "); UART_OutUDec(tally_0);
+		UART_OutString("    Signal 1 Count: "); UART_OutUDec(tally_1);
+		OutCRLF(); 
+		if(tally_0>1){
+			GPIO_PORTF_DATA_R = 0x02; 
 		}
+		
   }
 }
 
@@ -72,3 +76,22 @@ void PORTF_Init(void){
   NVIC_EN0_R = 0x40000000;      // (h) enable interrupt 30 in NVIC
 }
 
+
+// interrupt checks to see the start of the decoding
+void GPIOPortA_Handler(void){
+	if (GPIO_PORTA_RIS_R & 0x04){ // sw1 is pressed
+		GPIO_PORTA_ICR_R = 0x04; // clear flag
+		if (running==0){
+			running = 1; 
+		}
+	}
+}
+
+
+void SysTick_Handler(){
+	if(running==1){
+		GPIO_PORTF_DATA_R = 0x08;
+		if (SIGNAL==0) tally_0++; 
+		else tally_1++; 
+	}
+}

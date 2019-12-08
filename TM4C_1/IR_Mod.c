@@ -70,12 +70,24 @@ void sendPackage(char*ptr, char*cmd){
 	for(i=1;i>=0; i--){
 		bin = ptr[i];
 		//UART_OutUDec(number);
-		if(bin==1) logical_1(); 
-		else logical_0(); 
+		if(bin==1) {
+			logical_1(); 
+			UART_OutChar('1'); 
+		}
+		else {
+			logical_0(); 
+			UART_OutChar('0'); 
+		}
 	}
 	for(i=2; i>=0; i--){
 		bin = cmd[i];
-		if(bin==1) logical_1() ; 
-		else logical_0(); 
+		if(bin==1) {
+			logical_1(); 
+			UART_OutChar('1'); 
+		}
+		else {
+			logical_0(); 
+			UART_OutChar('0'); 
+		}
 	}
 }

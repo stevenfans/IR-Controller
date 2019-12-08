@@ -33,7 +33,9 @@
  For more information about my classes, my research, and my books, see
  http://users.ece.utexas.edu/~valvano/
  */
+ #include "stdint.h"
  #include "SysTick.h"
+ #include "tm4c123gh6pm.h"
 
 #define NVIC_ST_CTRL_R          (*((volatile unsigned long *)0xE000E010))
 #define NVIC_ST_RELOAD_R        (*((volatile unsigned long *)0xE000E014))
@@ -44,14 +46,29 @@
 #define NVIC_ST_CTRL_ENABLE     0x00000001  // Counter mode
 #define NVIC_ST_RELOAD_M        0x00FFFFFF  // Counter load value
 
-// Initialize SysTick with busy wait running at bus clock.
-void SysTick_Init(void){
-  NVIC_ST_CTRL_R = 0;                   // disable SysTick during setup
-  NVIC_ST_RELOAD_R = NVIC_ST_RELOAD_M;  // maximum reload value
-  NVIC_ST_CURRENT_R = 0;                // any write to current clears it
-                                        // enable SysTick with core clock
-  NVIC_ST_CTRL_R = NVIC_ST_CTRL_ENABLE+NVIC_ST_CTRL_CLK_SRC;
+//// Initialize SysTick with busy wait running at bus clock.
+//void SysTick_Init(void){
+//  NVIC_ST_CTRL_R = 0;                   // disable SysTick during setup
+//  NVIC_ST_RELOAD_R = NVIC_ST_RELOAD_M;  // maximum reload value
+//  NVIC_ST_CURRENT_R = 0;                // any write to current clears it
+//                                        // enable SysTick with core clock
+////  NVIC_ST_CTRL_R = NVIC_ST_CTRL_ENABLE+NVIC_ST_CTRL_CLK_SRC;
+
+//  NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0x00FFFFFF)|0x40000000; // priority 2
+//  NVIC_ST_CTRL_R = 0x07;      // enable SysTick with core clock and interrupts
+//}
+// Time delay using busy wait.
+// The delay parameter is in units of the core clock. (units of 20 nsec for 50 MHz clock)
+void SysTick_Init(unsigned long period){
+  NVIC_ST_CTRL_R = 0;         // disable SysTick during setup
+  NVIC_ST_RELOAD_R = period-1;// reload value
+  NVIC_ST_CURRENT_R = 0;      // any write to current clears it
+  NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0x00FFFFFF)|0x40000000; // priority 2          
+  NVIC_ST_CTRL_R = 0x07; // enable SysTick with core clock and interrupts
+  // enable interrupts after all initialization is finished
+
 }
+
 // Time delay using busy wait.
 // The delay parameter is in units of the core clock. (units of 20 nsec for 50 MHz clock)
 void SysTick_Wait(unsigned long delay){
@@ -62,14 +79,11 @@ void SysTick_Wait(unsigned long delay){
   }
   while(elapsedTime <= delay);
 }
-// 38Khz ->t=1/f-> 1/38e6-> 26.3e-6
-// 26.3e-6/20e-9 = 1300 / 2
-void SysTick_Wait19Khz(void){
-	SysTick_Wait(600); 
-}
 
+//80MHz -> 12.5 ns per count
+// 10us/12.5ns = 800 count
 void SysTick_Wait10us(void){
-	SysTick_Wait(500); // wait 10us (assumes 50 MHz clock) 
+	SysTick_Wait(800); // wait 10us (assumes 80 MHz clock) 
 }
 
 // Time delay using busy wait.
@@ -80,3 +94,7 @@ void SysTick_Wait1us(unsigned long delay){
     SysTick_Wait(16);  // wait 1us (assumes 16 MHz clock)
   }
 }
+
+//void SysTick_Handler(){
+//	GPIO_PORTF_DATA_R ^= 0x04; 
+//}

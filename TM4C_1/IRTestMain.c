@@ -78,20 +78,22 @@ int main(void){
 	startPulse(); 
   while(1){
 		n = 0;
-
 		//startPulse(); 
-		UART1_OutString("Enter Something: "); UART_OutChar('s'); 
-		UART1_InString(string, 1);  OutCRLF1(); 
-		command_decimal_num = string[0]-'0';
+		//logical_0(); 
+		//logical_1(); 
+		//startPulse(); 
+//		UART1_OutString("Enter Something: "); UART_OutChar('s'); 
+//		UART1_InString(string, 1);  OutCRLF1(); 
+//		command_decimal_num = string[0]-'0';
 
-	//turn the device number to a binary value
-		//UART_OutUDec(device_number); 	
-		addr_ptr = decimalToBin(address,device_number); 
-	//turn the command value to binary value
-		//UART_OutUDec(command_decimal_num);
-		cmd_ptr = decimalToBin(command, command_decimal_num); 
-		
-		sendPackage(addr_ptr, cmd_ptr);
+//	//turn the device number to a binary value
+//		//UART_OutUDec(device_number); 	
+//		addr_ptr = decimalToBin(address,device_number); 
+//	//turn the command value to binary value
+//		//UART_OutUDec(command_decimal_num);
+//		cmd_ptr = decimalToBin(command, command_decimal_num); 
+//		
+//		sendPackage(addr_ptr, cmd_ptr);
 	}
 }
 
