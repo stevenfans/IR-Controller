@@ -127,17 +127,19 @@ unsigned long stringToNumber(char string[3]){
 
 // return a pointer to an array of binary values	
 char *decimalToBin(char*arr, int decimal){
-	int i = 0; 
+	unsigned int i = 0; 
 	//UART_OutUDec(decimal); OutCRLF(); 
 	if(decimal==0){//zerocase
 		arr[0] = 0; 
 		arr[1] = 0; 
+		arr[2] = 0; 
 	}
 	//UART_OutChar('m');
-	while(decimal>0){
+	for(i=0;i<3;i++){
 		arr[i] = decimal%2;  
-		decimal = floor(decimal/2); 
-		i++; 
+		decimal = floor(decimal/2);
+		UART_OutUDec(decimal); 
+		UART_OutUDec(arr[i]);		
 	}
 	return arr;  
 }

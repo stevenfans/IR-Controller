@@ -30,21 +30,25 @@ Build target 'UART'
 compiling UARTTestMain.c...
 UARTTestMain.c(36): warning:  #1295-D: Deprecated declaration Timer0_Init - give arg types
   void Timer0_Init(); 
-UARTTestMain.c(47): warning:  #177-D: variable "frequency"  was declared but never referenced
+UARTTestMain.c(38): warning:  #1295-D: Deprecated declaration checkStartPulse - give arg types
+  void checkStartPulse(); 
+UARTTestMain.c(39): warning:  #1295-D: Deprecated declaration check1 - give arg types
+  void check1(); 
+UARTTestMain.c(40): warning:  #1295-D: Deprecated declaration check0 - give arg types
+  void check0(); 
+UARTTestMain.c(53): warning:  #177-D: variable "frequency"  was declared but never referenced
   	unsigned long frequency = 262;
-UARTTestMain.c(48): warning:  #177-D: variable "last_frequency"  was declared but never referenced
+UARTTestMain.c(54): warning:  #177-D: variable "last_frequency"  was declared but never referenced
   	unsigned long last_frequency = 262;
-UARTTestMain.c(49): warning:  #177-D: variable "freq_value"  was declared but never referenced
+UARTTestMain.c(55): warning:  #177-D: variable "freq_value"  was declared but never referenced
   	unsigned long freq_value;  
-UARTTestMain.c(50): warning:  #177-D: variable "string"  was declared but never referenced
+UARTTestMain.c(56): warning:  #177-D: variable "string"  was declared but never referenced
   	char string [10]; 
-UARTTestMain.c(52): warning:  #550-D: variable "state"  was set but never used
-  	int state = 0 ; 
-UARTTestMain.c: 6 warnings, 0 errors
+UARTTestMain.c: 8 warnings, 0 errors
 linking...
-Program Size: Code=2976 RO-data=32 RW-data=36 ZI-data=1140  
-".\UART.axf" - 0 Error(s), 6 Warning(s).
-Build Time Elapsed:  00:00:02
+Program Size: Code=3320 RO-data=32 RW-data=40 ZI-data=1144  
+".\UART.axf" - 0 Error(s), 8 Warning(s).
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
