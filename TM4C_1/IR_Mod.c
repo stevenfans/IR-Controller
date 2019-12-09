@@ -23,16 +23,19 @@ void modulateSignal(void){
 	SysTick_Wait19Khz(); 
 }
 void nomodulateSignal(void){
+	SIGNAL = 0x00; 
 	SysTick_Wait19Khz(); 
+	SIGNAL = 0x00; 
 	SysTick_Wait19Khz(); 
 }
 // 1ms high = 38 pulses,  800us low = 30 pulses
+// 38/19
 void startPulse(void){
 	unsigned long i; 
 	for(i=0; i<38; i++){
 		modulateSignal(); 
 	}
-	for(i=0; i<30; i++){
+	for(i=0; i<35; i++){
 		nomodulateSignal(); 
 	}
 }
@@ -72,22 +75,22 @@ void sendPackage(char*ptr, char*cmd){
 		//UART_OutUDec(number);
 		if(bin==1) {
 			logical_1(); 
-			UART_OutChar('1'); 
+			UART1_OutChar('1'); 
 		}
 		else {
 			logical_0(); 
-			UART_OutChar('0'); 
+			UART1_OutChar('0'); 
 		}
 	}
 	for(i=2; i>=0; i--){
 		bin = cmd[i];
 		if(bin==1) {
 			logical_1(); 
-			UART_OutChar('1'); 
+			UART1_OutChar('1'); 
 		}
 		else {
 			logical_0(); 
-			UART_OutChar('0'); 
+			UART1_OutChar('0'); 
 		}
 	}
 }
