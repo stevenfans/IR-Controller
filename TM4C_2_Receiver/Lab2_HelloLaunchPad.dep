@@ -1,0 +1,50 @@
+Dependencies for Project 'Lab2', Target 'HelloLaunchPad': (DO NOT MODIFY !)
+F (.\startup.s)(0x5DEEBB1D)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
+F (.\lab2_graphics.c)(0x5DEEF4A1)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\lab2_graphics.o --omf_browse .\lab2_graphics.crf --depend .\lab2_graphics.d)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C89844)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C89844)
+I (C:\Keil\ARM\ARMCC\include\string.h)(0x51C89844)
+I (ST7735.h)(0x5DEEBB1D)
+I (SysTick.h)(0x5DEEEAC8)
+I (PLL.h)(0x5DEEBB1D)
+I (waveforms.h)(0x5DEEBB1D)
+I (walking.h)(0x5DEEF451)
+I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x51C89844)
+I (tm4c123gh6pm.h)(0x5DEEBB1D)
+I (IR_Demod.h)(0x5DEEBB4D)
+I (UART.h)(0x5DEEBB4D)
+I (C:\Keil\ARM\ARMCC\include\math.h)(0x51C89844)
+F (.\PLL.c)(0x5DEEBB1D)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\pll.o --omf_browse .\pll.crf --depend .\pll.d)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C89844)
+I (PLL.h)(0x5DEEBB1D)
+I (tm4c123gh6pm.h)(0x5DEEBB1D)
+F (.\ST7735.c)(0x5DEEBB1D)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\st7735.o --omf_browse .\st7735.crf --depend .\st7735.d)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C89844)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C89844)
+I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x51C89844)
+I (ST7735.h)(0x5DEEBB1D)
+I (tm4c123gh6pm.h)(0x5DEEBB1D)
+F (.\walking.c)(0x5DEEF4C1)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\walking.o --omf_browse .\walking.crf --depend .\walking.d)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C89844)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C89844)
+I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x51C89844)
+I (walking.h)(0x5DEEF451)
+I (ST7735.h)(0x5DEEBB1D)
+F (.\SysTick.c)(0x5DEEEB6B)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\systick.o --omf_browse .\systick.crf --depend .\systick.d)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C89844)
+I (tm4c123gh6pm.h)(0x5DEEBB1D)
+I (waveforms.h)(0x5DEEBB1D)
+F (.\waveforms.c)(0x5DEEBB1D)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\waveforms.o --omf_browse .\waveforms.crf --depend .\waveforms.d)
+I (waveforms.h)(0x5DEEBB1D)
+I (tm4c123gh6pm.h)(0x5DEEBB1D)
+I (SysTick.h)(0x5DEEEAC8)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C89844)
+F (.\IR_Demod.c)(0x5DEEBE0E)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\ir_demod.o --omf_browse .\ir_demod.crf --depend .\ir_demod.d)
+I (SysTick.h)(0x5DEEEAC8)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C89844)
+I (IR_Demod.h)(0x5DEEBB4D)
+I (tm4c123gh6pm.h)(0x5DEEBB1D)
+I (UART.h)(0x5DEEBB4D)
+F (.\UART.c)(0x5DEEBB4D)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\uart.o --omf_browse .\uart.crf --depend .\uart.d)
+I (UART.h)(0x5DEEBB4D)
+I (tm4c123gh6pm.h)(0x5DEEBB1D)
